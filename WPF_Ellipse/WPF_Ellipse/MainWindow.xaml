@@ -20,7 +20,7 @@
                     <Style TargetType="MenuItem">
                         <Setter Property="Header" Value="{Binding Name}"/>
                         <Setter Property="IsCheckable" Value="True"/>
-                        <Setter Property="Command" Value="{Binding DataContext.SelectHexagone_Command, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}, Mode=FindAncestor}}"/>
+                        <Setter Property="Command" Value="{Binding DataContext.SelectEllipse_Command, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}, Mode=FindAncestor}}"/>
                         <Setter Property="CommandParameter" Value="{Binding}"></Setter>
                     </Style>
                 </MenuItem.ItemContainerStyle>
