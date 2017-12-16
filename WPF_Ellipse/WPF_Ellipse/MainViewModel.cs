@@ -14,11 +14,13 @@ using System.Xml.Serialization;
 using System.Windows.Controls;
 using WPF_Ellipse;
 
-namespace WPF_Hexagones
+namespace WPF_Ellipse
 {
     public class MainViewModel : INotifyPropertyChanged
     {
+        private Canvas DrawCanvas { get; set; }
         public ObservableCollection<Ellipse> Ellipses { get; set; }
+
         private Ellipse CurrentEllipse { get; set; }
 
         private Point PrevPoint { get; set; }
@@ -73,6 +75,8 @@ namespace WPF_Hexagones
 
             SelectEllipse_Command = new RelayCommand(SelectEllipse);
             Drag_Command = new RelayCommand(Drag);
+
+            MousePosition = default(Point);
         }
 
         private void DrawClick(object obj)
@@ -112,7 +116,9 @@ namespace WPF_Hexagones
                 }
 
                 CurrentEllipse.Name = String.Format("Ellipse_{0}", Ellipses.Count + 1);
+
                 Ellipses.Add(CurrentEllipse);
+
 
                 CurrentEllipse = new Ellipse();
                 OnPropertyChanged("Ellipses");
@@ -208,12 +214,20 @@ namespace WPF_Hexagones
 
         private void SelectEllipse(object obj)
         {
-            Ellipse curEllipse = (obj as Ellipse);
+            if (MousePosition != default(Point))
+            {
+                MousePosition = default(Point);
+            }
+            else
+            {
+                Ellipse curEllipse = (obj as Ellipse);
 
-            curEllipse.MouseDown += new MouseButtonEventHandler(Ellipse_MouseDown);
-            curEllipse.MouseUp += new MouseButtonEventHandler(Ellipse_MouseUp);
-            curEllipse.MouseMove += new MouseEventHandler(Ellipse_MouseMove);
+                MousePosition = new Point(-5, -5);
 
+                curEllipse.MouseDown += new MouseButtonEventHandler(Ellipse_MouseDown);
+                curEllipse.MouseUp += new MouseButtonEventHandler(Canvas_MouseUp);
+                curEllipse.MouseMove += new MouseEventHandler(Canvas_MouseMove);
+            }
         }
 
         private void Drag(object obj)
@@ -226,30 +240,28 @@ namespace WPF_Hexagones
             AllowDragging = true;
             SelectedEllipse = sender as Ellipse;
             MousePosition = e.GetPosition(SelectedEllipse);
+
             SelectedEllipse.CaptureMouse();
         }
 
-        void Ellipse_MouseUp(object sender, MouseButtonEventArgs e)
+        void Canvas_MouseUp(object sender, MouseButtonEventArgs e)
         {
             AllowDragging = false;
-            (sender as Ellipse).ReleaseMouseCapture();
+            SelectedEllipse.ReleaseMouseCapture();
         }
 
-        void Ellipse_MouseMove(object sender, MouseEventArgs e)
+        void Canvas_MouseMove(object sender, MouseEventArgs e)
         {
-            //if (AllowDragging)
-            //{
-            //    Canvas.SetLeft(SelectedEllipse, e.GetPosition(sender as IInputElement).X - MousePosition.X);
-            //    Canvas.SetTop(SelectedEllipse, e.GetPosition(sender as IInputElement).Y - MousePosition.Y);
-            //}
-
             if (AllowDragging)
             {
                 Point punto = e.GetPosition(sender as IInputElement);
                 int mouseX = (int)punto.X;
                 int mouseY = (int)punto.Y;
-                SelectedEllipse.SetValue(Canvas.LeftProperty, (double)mouseX - MousePosition.X); //set x
-                SelectedEllipse.SetValue(Canvas.TopProperty, (double)mouseY - MousePosition.Y); //set y
+
+                double _left = SelectedEllipse.Margin.Left + e.GetPosition(sender as IInputElement).X - MousePosition.X;
+                double _top = SelectedEllipse.Margin.Top + e.GetPosition(sender as IInputElement).Y - MousePosition.Y;
+
+                SelectedEllipse.Margin = new Thickness(_left, _top, 0, 0);
             }
         }
 

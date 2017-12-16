@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace WPF_Hexagones
+namespace WPF_Ellipse
 {
 	public class RelayCommand : ICommand
 	{

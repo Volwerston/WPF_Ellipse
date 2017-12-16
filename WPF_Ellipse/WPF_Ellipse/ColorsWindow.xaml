@@ -1,9 +1,9 @@
-﻿<Window x:Class="WPF_Hexagones.ColorsWindow"
+﻿<Window x:Class="WPF_Ellipse.ColorsWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WPF_Hexagones"
+        xmlns:local="clr-namespace:WPF_Ellipse"
         mc:Ignorable="d"
         x:Name="ColorsWindowName" Title="Colors" Height="101.608" Width="213.055">
     <Grid>

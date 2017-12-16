@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 
 
-namespace WPF_Hexagones
+namespace WPF_Ellipse
 {
     public partial class MainWindow : Window
     {

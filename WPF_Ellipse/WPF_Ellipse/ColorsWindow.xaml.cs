@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace WPF_Hexagones
+namespace WPF_Ellipse
 {
     public partial class ColorsWindow : Window
     {
