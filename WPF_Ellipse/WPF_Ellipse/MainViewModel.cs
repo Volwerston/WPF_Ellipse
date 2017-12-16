@@ -217,6 +217,11 @@ namespace WPF_Ellipse
             if (MousePosition != default(Point))
             {
                 MousePosition = default(Point);
+
+
+                SelectedEllipse.MouseDown -= new MouseButtonEventHandler(Ellipse_MouseDown);
+                SelectedEllipse.MouseUp -= new MouseButtonEventHandler(Canvas_MouseUp);
+                SelectedEllipse.MouseMove -= new MouseEventHandler(Canvas_MouseMove);
             }
             else
             {
@@ -247,6 +252,7 @@ namespace WPF_Ellipse
         void Canvas_MouseUp(object sender, MouseButtonEventArgs e)
         {
             AllowDragging = false;
+
             SelectedEllipse.ReleaseMouseCapture();
         }
 
