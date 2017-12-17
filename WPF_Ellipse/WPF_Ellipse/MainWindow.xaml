@@ -5,15 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF_Ellipse"
         mc:Ignorable="d"
-        x:Name="MainWindowOne" Height="550" Width="750">
+        x:Name="MainWindowOne" Title="Ellipse Painter" Height="550" MinHeight="550" Width="750" MinWidth="750">
     <DockPanel>
         <Menu DockPanel.Dock="Top" x:Name="aa">
             <MenuItem Header="File">
                 <MenuItem Header="New" Command="{Binding ClearWindow_Command}"/>
                 <MenuItem Header="Open" Command="{Binding OpenFile_Command}"/>
                 <MenuItem Header="Save" Command="{Binding SaveFile_Command}"/>
-                <Separator />
-                <MenuItem Header="Exit" Command="{Binding CloseWindow_Command}" CommandParameter="{Binding ElementName=MainWindowName}"/>
             </MenuItem>
             <MenuItem Header="Shapes" ItemsSource="{Binding Ellipses}">
                 <MenuItem.ItemContainerStyle>

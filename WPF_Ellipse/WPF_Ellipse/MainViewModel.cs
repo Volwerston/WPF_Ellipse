@@ -69,7 +69,6 @@ namespace WPF_Ellipse
             ClearWindow_Command = new RelayCommand(ClearWindow);
             OpenFile_Command = new RelayCommand(OpenFile);
             SaveFile_Command = new RelayCommand(SaveFile);
-            CloseWindow_Command = new RelayCommand(CloseWindow);
             DrawClick_Command = new RelayCommand(DrawClick);
             ApplyColor_Command = new RelayCommand(ApplyColor);
 
@@ -205,12 +204,6 @@ namespace WPF_Ellipse
                 }
             }
         }
-
-        private void CloseWindow(object obj)
-        {
-            (obj as MainWindow).Close();
-        }
-
 
         private void SelectEllipse(object obj)
         {
